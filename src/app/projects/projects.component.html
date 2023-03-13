@@ -1,0 +1,40 @@
+<div *ngIf="!selectedProject" class="flex flex-row px-4">
+  <div class="flex flex-row flex-wrap justify-evenly basis-4/5 gap-1">
+    <article *ngFor="let project of projects | projectFilter : tagFilter"
+      [class.hidden]="categoryFilter && project.category?.id != categoryFilter.id"
+      class="w-72 h-72 p-4 border border-slate-400 rounded-lg shadow-lg bg-slate-50 flex flex-col">
+      <section class="flex-grow">
+        <h2 class="text-xl font-bold mb-3">{{ project.title | uppercase }}</h2>
+        <div>{{ project.excerpt }}</div>
+      </section>
+      <footer class="mt-3">
+        <div *ngIf="project.category" (click)="setCategoryFilter(project.category)">
+          Category: <span class="hover:underline hover:cursor-pointer">{{ project.category.name }}</span>
+        </div>
+        <div *ngIf="project.tags?.length">
+          Tags:
+          <span *ngFor="let tag of project.tags" (click)="setTagFilter(tag)" class="hover:underline hover:cursor-pointer">
+            {{ tag.name }}
+          </span>
+        </div>
+      </footer>
+    </article>
+  </div>
+
+  <!-- filter sidebar -->
+  <div class="basis-1/5 pl-5">
+    <h1 class="text-2xl font-bold">Filter</h1>
+    <h1 *ngIf="categoryFilter">{{ categoryFilter.name }} <i (click)="clearCategoryFilter()"
+        class="fa-solid fa-trash hover:cursor-pointer"></i></h1>
+    <h1 *ngIf="tagFilter">{{ tagFilter.name }} <i (click)="clearTagFilter()"
+        class="fa-solid fa-trash hover:cursor-pointer"></i></h1>
+    <app-categories [categoryFilter]="categoryFilter"
+      (newCategoryFilterEvent)="setCategoryFilter($event)"></app-categories>
+    <app-tags [tagFilter]="tagFilter" (newTagFilterEvent)="setTagFilter($event)"></app-tags>
+  </div>
+</div>
+
+<section *ngIf="selectedProject">
+  <div (click)="clearSelectedProject()">Back</div>
+  <app-project-detail></app-project-detail>
+</section>
