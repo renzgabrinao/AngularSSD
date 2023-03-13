@@ -7,7 +7,8 @@ const routes: Routes = [
   {path: 'projects', component: ProjectsComponent},
   {path: 'projects/:slug', component: ProjectDetailComponent},
   {path: 'projects/categories/:slug', component: ProjectsComponent},
-  {path: 'projects/tags/:slug', component: ProjectsComponent}
+  {path: 'projects/tags/:slug', component: ProjectsComponent},
+  {path: '', redirectTo: '/projects', pathMatch: 'full'}
 ];
 
 @NgModule({
