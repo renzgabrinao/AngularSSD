@@ -71,6 +71,12 @@ export class ProjectsComponent implements OnInit {
     this.selectedProject = undefined;
   }
 
+  dropdownState =  false;
+
+  clickFilter() {
+    this.dropdownState = !this.dropdownState;
+  }
+
   ngOnInit(): void {
     const segment: string = this.route.snapshot.url[1]?.path;
 

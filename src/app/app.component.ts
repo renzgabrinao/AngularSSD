@@ -41,4 +41,8 @@ export class AppComponent {
     this.tagFilter = undefined;
   }
 
+  scroll(el: HTMLElement) {
+    el.scrollIntoView({behavior: 'smooth'});
+  }
+
 }
