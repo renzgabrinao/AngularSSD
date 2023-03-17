@@ -25,6 +25,8 @@ export class AppComponent {
   tagFilter: Tag | undefined;
   categoryFilter: Category | undefined;
 
+  imgSpin = false;
+
   setCategoryFilter(category: Category) {
     this.categoryFilter = category;
   }
@@ -43,6 +45,10 @@ export class AppComponent {
 
   scroll(el: HTMLElement) {
     el.scrollIntoView({behavior: 'smooth'});
+  }
+
+  imgClick() {
+    this.imgSpin = !this.imgSpin;
   }
 
 }
